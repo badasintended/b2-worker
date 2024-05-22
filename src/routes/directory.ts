@@ -66,9 +66,9 @@ export const directory = factory.createHandlers(
                 </tr>
               </thead>
               <tbody>
-                ${listing('../', false, 0, 0)}
+                ${directory === '' ? '' : listing('..', '\u2014 Go up', false, 0, 0)}
                 ${files.map(it =>
-                  listing(`${it.fileName}`, it.action === 'upload', it.contentLength, it.uploadTimestamp),
+                  listing(`${it.fileName}`, it.fileName, it.action === 'upload', it.contentLength, it.uploadTimestamp),
                 )}
               </tbody>
             </table>
@@ -114,11 +114,11 @@ function humanSize(value: number): string {
   return `${truncated.toFixed()} ${'KMGTPE'.charAt(exponent)}B`
 }
 
-function listing(name: string, isFile: boolean, size: number, timestamp: number) {
+function listing(path: string, name: string, isFile: boolean, size: number, timestamp: number) {
   let dateStr: string
   let sizeStr: string
   if (isFile) {
-    dateStr = new Date(timestamp).toISOString()
+    dateStr = new Date(timestamp).toISOString().replace('T', ' ').split('.')[0]
     sizeStr = humanSize(size)
   } else {
     dateStr = '\u2014'
@@ -128,7 +128,7 @@ function listing(name: string, isFile: boolean, size: number, timestamp: number)
   return html`
     <tr class="entry">
       <td class="pad"></td>
-      <td class="name"><a href="./${name}">${name}</a></td>
+      <td class="name"><a href="${path}">${name}</a></td>
       <td class="size">${sizeStr}</td>
       <td class="date">${dateStr}</td>
       <td class="pad"></td>

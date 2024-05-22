@@ -2,14 +2,15 @@ import { factory } from './app'
 import { auth } from './middleware/auth'
 import { directory } from './routes/directory'
 import { file } from './routes/file'
+import { staticRoutes } from './routes/static'
 
-const app = factory.createApp()
+export default factory.createApp()
+  .route('/', staticRoutes)
 
-app.use(auth)
+  .route('/', factory.createApp()
+    .use(auth)
 
-app.get('/', ...directory)
-app.get(':dir{.*}/', ...directory)
+    .get('/', ...directory)
+    .get(':dir{.*}/', ...directory)
 
-app.get('*', ...file)
-
-export default app
+    .get('*', ...file))

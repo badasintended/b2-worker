@@ -4,7 +4,6 @@ export type PublicConfig = {
   apiRefreshTime: number
   directoryCache: number
   fileCache: number
-  style: string
 }
 
 export type PrivateConfig = {

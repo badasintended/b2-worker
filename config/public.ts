@@ -1,5 +1,4 @@
 import type { PublicConfig } from '../src/config'
-import styleCss from '../static/style.css'
 
 export default {
   /**
@@ -32,9 +31,4 @@ export default {
    */
   fileCache: 7 * 24 * 60 * 60,
 
-  /**
-   * Will be appended to the <head> tag.
-   * Can also be a reference to a static css file using the <link> tag, if you prefer.
-   */
-  style: `<style>${styleCss}</style>`,
 } satisfies PublicConfig

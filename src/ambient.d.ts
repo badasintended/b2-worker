@@ -3,7 +3,7 @@ declare module '*.css' {
   export default v
 }
 
-declare module '*.svg' {
+declare module '*.txt' {
   const v: string
   export default v
 }

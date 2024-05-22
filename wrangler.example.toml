@@ -1,0 +1,10 @@
+name = "b2-worker"
+compatibility_date = "2023-12-01"
+
+[[rules]]
+type = "Text"
+globs = [ "**/*.css" ]
+
+[[kv_namespaces]]
+binding = "KV"
+id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

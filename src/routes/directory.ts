@@ -1,9 +1,9 @@
 import { html } from 'hono/html'
-import publicConfig from '../../config/public'
 import { factory } from '../app'
 import { listFileNames } from '../lib/b2'
 import { memory } from '../memory'
 import { cache } from '../middleware/cache'
+import { publicConfig } from '../config'
 
 const collator = new Intl.Collator('en', {
   numeric: true,

@@ -1,4 +1,4 @@
-import { FILLME, type PrivateConfig } from '../src/config'
+import type { PrivateConfig } from '../src/config'
 
 export default {
   /**
@@ -6,8 +6,8 @@ export default {
    * Need to only have access to single bucket.
    */
   b2: {
-    keyId: FILLME(),
-    key: FILLME(),
+    keyId: '',
+    key: '',
   },
 
   /**

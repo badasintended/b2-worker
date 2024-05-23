@@ -1,9 +1,13 @@
+import publicConfig from '../config/public'
+import privateConfig from '../config/private'
+
 export type PublicConfig = {
   siteName: string
   uploader: boolean
   apiRefreshTime: number
   directoryCache: number
   fileCache: number
+  extraMimes: Record<string, string>
 }
 
 export type PrivateConfig = {
@@ -14,6 +18,7 @@ export type PrivateConfig = {
   }
 }
 
-export function FILLME(): never {
-  throw new Error('FILLME')
+export {
+  publicConfig,
+  privateConfig,
 }

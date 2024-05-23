@@ -1,6 +1,5 @@
-import privateConfig from '../../config/private'
-import publicConfig from '../../config/public'
 import { factory } from '../app'
+import { privateConfig, publicConfig } from '../config'
 import { authorizeAccount } from '../lib/b2'
 import type { MemoryAuthorizeAccountResponse } from '../memory'
 import { memory } from '../memory'

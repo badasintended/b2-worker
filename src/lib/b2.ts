@@ -92,11 +92,10 @@ export async function listFileNames(auth: AuthorizeAccountResponse, req: ListFil
 export async function downloadFile(auth: AuthorizeAccountResponse, file: string) {
   const { downloadUrl, bucketName } = auth.apiInfo.storageApi
   const url = `${downloadUrl}/file/${bucketName}/${file}`
-  const res = await tfetch(url, {
+
+  return tfetch(url, {
     headers: {
       Authorization: auth.authorizationToken,
     },
   })
-
-  return res
 }

@@ -1,5 +1,5 @@
 import { cache as honoCache } from 'hono/cache'
-import publicConfig from '../../config/public'
+import { publicConfig } from '../config'
 
 export const directoryCache = cache(publicConfig.directoryCache)
 export const fileCache = cache(publicConfig.fileCache)

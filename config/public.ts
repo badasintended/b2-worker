@@ -31,4 +31,12 @@ export default {
    */
   fileCache: 7 * 24 * 60 * 60,
 
+  /**
+   * Extra mime types to be matched besides Hono's base mimes.
+   * https://github.com/honojs/hono/blob/main/src/utils/mime.ts
+   */
+  extraMimes: {
+    pom: 'application/xml',
+    jar: 'application/java-archive',
+  },
 } satisfies PublicConfig

@@ -1,9 +1,10 @@
 import { mimes as baseMimes, getMimeType } from 'hono/utils/mime'
 import { factory } from '../app'
+import { publicConfig } from '../config'
 
 export const mimes = {
   ...baseMimes,
-  pom: baseMimes.xml,
+  ...publicConfig.extraMimes,
 }
 
 export const mime = factory.createMiddleware(async (c, next) => {

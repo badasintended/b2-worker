@@ -13,5 +13,5 @@ export default {
   /**
    * Mapping of username and password for uploading.
    */
-  accounts: {},
-} satisfies PrivateConfig
+  accounts: [],
+} satisfies PrivateConfig as PrivateConfig

@@ -99,3 +99,47 @@ export async function downloadFile(auth: AuthorizeAccountResponse, file: string)
     },
   })
 }
+
+// ---
+// b2_get_upload_url
+// https://www.backblaze.com/apidocs/b2-get-upload-url
+
+const GET_UPLOAD_URL_ENDPOINT = '/b2api/v3/b2_get_upload_url'
+
+export type GetUploadUrlResponse = {
+  uploadUrl: string
+  authorizationToken: string
+}
+
+export async function getUploadUrl(auth: AuthorizeAccountResponse) {
+  const { apiUrl, bucketId } = auth.apiInfo.storageApi
+
+  return tfetch<GetUploadUrlResponse>(apiUrl + GET_UPLOAD_URL_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Authorization': auth.authorizationToken,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ bucketId }),
+  })
+}
+
+// ---
+// b2_upload_file
+// https://www.backblaze.com/apidocs/b2-upload-file
+
+export async function uploadFile(auth: GetUploadUrlResponse, fileName: string, length: number, body: ReadableStream) {
+  const encodedFileName = encodeURIComponent(fileName)
+
+  return tfetch(auth.uploadUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': auth.authorizationToken,
+      'Content-Type': 'b2/x-auto',
+      'Content-Length': `${length}`,
+      'X-Bz-File-Name': encodedFileName,
+      'X-Bz-Content-Sha1': 'do_not_verify',
+    },
+    body,
+  })
+}

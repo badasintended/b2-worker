@@ -12,4 +12,4 @@ export const memory = {} as {
   auth?: MemoryAuthorizeAccountResponse
 }
 
-export const cfCache = caches.default
+export const cfCache = await caches.open('b2-worker')

@@ -11,7 +11,11 @@ export type PublicConfig = {
 }
 
 export type PrivateConfig = {
-  accounts: Record<string, string>
+  accounts: Array<{
+    username: string
+    password: string
+  }>
+
   b2: {
     keyId: string
     key: string

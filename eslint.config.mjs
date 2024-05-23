@@ -6,6 +6,7 @@ export default antfu({
   rules: {
     'style/brace-style': ['error', '1tbs'],
     'style/jsx-one-expression-per-line': 'off',
+    'curly': ['error', 'multi-line'],
   },
 
   typescript: {

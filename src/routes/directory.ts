@@ -1,9 +1,11 @@
 import { html } from 'hono/html'
 import { factory } from '../app'
+import { publicConfig } from '../config'
 import { listFileNames } from '../lib/b2'
 import { memory } from '../memory'
-import { cache } from '../middleware/cache'
-import { publicConfig } from '../config'
+import { b2Auth } from '../middleware/b2auth'
+import { directoryCache } from '../middleware/cache'
+import { template } from '../template'
 
 const collator = new Intl.Collator('en', {
   numeric: true,
@@ -12,7 +14,8 @@ const collator = new Intl.Collator('en', {
 })
 
 export const directory = factory.createHandlers(
-  cache(publicConfig.directoryCache),
+  b2Auth,
+  directoryCache,
 
   async (c) => {
     const directory = c.req.path.substring(1)
@@ -26,9 +29,13 @@ export const directory = factory.createHandlers(
 
     // return c.json(files)
 
+    let empty = false
     if (list.files.length === 0) {
-      c.status(404)
-      return c.text('Not found')
+      empty = true
+      if (directory !== '') {
+        c.status(404)
+        return c.text('Not found')
+      }
     }
 
     const files = list.files
@@ -38,23 +45,22 @@ export const directory = factory.createHandlers(
         ? collator.compare(a.fileName, b.fileName)
         : a.action === 'folder' ? -1 : 1)
 
-    return c.html(html`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>${c.req.path}</title>
-          <link rel="stylesheet" type="text/css" href="/style.css">
-        </head>
-        <body>
-          <header>
-            <h1>
-              <a href="/">${publicConfig.siteName}</a>
-              ${directory.split('/').map((it, i, a) => html`
-                / <a href=${'../'.repeat(Math.max(0, a.length - i - 2))}>${it}</a>
-              `)}
-            </h1>
-          </header>
-          <main>
+    return c.html(template(
+      c.req.path,
+
+      html`
+        <a href="/">${publicConfig.siteName}</a>
+        ${directory.split('/').map((it, i, a) => html`
+          / <a href="${'../'.repeat(Math.max(0, a.length - i - 2))}">${it}</a>
+        `)}
+
+        <div class="grow"></div>
+        <a class="uploader" href="/uploader?d=/${directory}">Upload<a/>
+      `,
+
+      empty
+        ? html`<div>Directory Empty</div>`
+        : html`
             <table class="listing">
               <thead>
                 <tr class="entry">
@@ -72,13 +78,8 @@ export const directory = factory.createHandlers(
                 )}
               </tbody>
             </table>
-          </main>
-          <footer>
-            <a href="//git.bai.lol/b2-worker">b2-worker</a>
-          </footer>
-        </body>
-      </html>
-    `)
+          `,
+    ))
   },
 )
 
@@ -92,24 +93,27 @@ const decimals = [
 ]
 
 function humanSize(value: number): string {
-  if (value < 1000)
+  if (value < 1000) {
     return `${value} B`
+  }
 
   let exponent = -1
   let divisor = 0
 
   for (const decimal of decimals) {
-    if (value < decimal)
+    if (value < decimal) {
       break
+    }
     exponent++
     divisor = decimal
   }
 
   let truncated = value / divisor
-  if (truncated >= 100)
+  if (truncated >= 100) {
     truncated = Math.round(truncated)
-  else if (truncated >= 10)
+  } else if (truncated >= 10) {
     truncated = Math.round(truncated * 10) / 10
+  }
 
   return `${truncated.toFixed()} ${'KMGTPE'.charAt(exponent)}B`
 }

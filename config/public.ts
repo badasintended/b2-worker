@@ -39,4 +39,4 @@ export default {
     pom: 'application/xml',
     jar: 'application/java-archive',
   },
-} satisfies PublicConfig
+} satisfies PublicConfig as PublicConfig

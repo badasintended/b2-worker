@@ -16,6 +16,7 @@ header {
 }
 
 header > h1,
+main > div,
 footer {
   padding: 1rem 0.8rem;
   max-width: calc(var(--max-width) - 1.5rem);
@@ -25,6 +26,13 @@ footer {
 header > h1 {
   font-size: 1.25rem;
   font-weight: normal;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.grow {
+  flex-grow: 1;
 }
 
 footer {

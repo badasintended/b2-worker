@@ -78,3 +78,7 @@ a {
   width: calc((100vw - var(--max-width)) / 2);
   padding: 0.25rem;
 }
+
+input#directory {
+  width: 100%;
+}

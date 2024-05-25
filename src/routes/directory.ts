@@ -55,7 +55,7 @@ export const directory = factory.createHandlers(
         `)}
 
         <div class="grow"></div>
-        <a class="uploader" href="/uploader?d=/${directory}">Upload<a/>
+        <a href="/uploader?d=/${directory}">Upload</a>
       `,
 
       empty

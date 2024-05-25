@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "wrangler dev --port 8787",
-    "build": "wrangler deploy --outdir .bundled/ --dry-run",
+    "build": "rm -rf .bundled/ && wrangler deploy --outdir .bundled/ --dry-run",
     "deploy": "wrangler deploy --minify",
     "prepare": "husky"
   },

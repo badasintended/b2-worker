@@ -4,7 +4,16 @@ import { publicConfig } from '../config'
 
 export const mimes = {
   ...baseMimes,
-  ...publicConfig.extraMimes,
+}
+
+for (const [mime, extensions] of Object.entries(publicConfig.extraMimes)) {
+  if (Array.isArray(extensions)) {
+    for (const extension of extensions) {
+      mimes[extension] = mime
+    }
+  } else {
+    mimes[extensions] = mime
+  }
 }
 
 export const mime = factory.createMiddleware(async (c, next) => {

@@ -36,7 +36,8 @@ export default {
    * https://github.com/honojs/hono/blob/main/src/utils/mime.ts
    */
   extraMimes: {
-    pom: 'application/xml',
-    jar: 'application/java-archive',
+    'application/xml': 'pom',
+    'application/java-archive': 'jar',
+    'text/plain': ['md5', 'sha1', 'sha256', 'sha512'],
   },
 } satisfies PublicConfig as PublicConfig

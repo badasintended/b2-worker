@@ -7,7 +7,7 @@ export type PublicConfig = {
   apiRefreshTime: number
   directoryCache: number
   fileCache: number
-  extraMimes: Record<string, string>
+  extraMimes: Record<string, string | string[]>
 }
 
 export type PrivateConfig = {

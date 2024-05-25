@@ -1,5 +1,6 @@
 name = "b2-worker"
 compatibility_date = "2023-12-01"
+main = "src/index.ts"
 
 [[rules]]
 type = "Text"

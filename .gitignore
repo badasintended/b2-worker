@@ -4,5 +4,6 @@ dist
 .dev.vars
 wrangler.toml
 
+.bundled/
 config/private.ts
 curl/

@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler deploy --minify src/index.ts",
+    "dev": "wrangler dev --port 8787",
+    "build": "wrangler deploy --outdir .bundled/ --dry-run",
+    "deploy": "wrangler deploy --minify",
     "prepare": "husky"
   },
   "dependencies": {

@@ -2,8 +2,8 @@
 
 UPSTREAM="https://github.com/badasintended/b2-worker"
 
-read -p 'Repository name: ' $repo_name
-read -p 'New origin remote repository (MUST BE PRIVATE): ' $remote_origin
+read -p 'Repository name: ' repo_name
+read -p 'New origin remote repository (MUST BE PRIVATE): ' remote_origin
 
 git clone "$UPSTREAM" "$repo_name"
 

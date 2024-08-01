@@ -1,5 +1,5 @@
 import { factory } from '../app'
-import { privateConfig, publicConfig } from '../config'
+import { config } from '../config'
 import { authorizeAccount } from '../lib/b2'
 import type { MemoryAuthorizeAccountResponse } from '../memory'
 import { memory } from '../memory'
@@ -10,7 +10,7 @@ export const b2Auth = factory.createMiddleware(async (c, next) => {
     const authKv = authStr !== null ? JSON.parse(authStr) as MemoryAuthorizeAccountResponse : null
 
     if (authKv === null || isAuthStale(authKv)) {
-      const response = await authorizeAccount(privateConfig.b2.keyId, privateConfig.b2.key)
+      const response = await authorizeAccount(config.b2.keyId, config.b2.key)
       const auth = await response.json()
 
       memory.auth = {
@@ -38,5 +38,5 @@ export const b2Auth = factory.createMiddleware(async (c, next) => {
 
 function isAuthStale(auth: MemoryAuthorizeAccountResponse) {
   const seconds = (Date.now() - auth.timestamp) / 1000
-  return Number.isNaN(seconds) || seconds < 0 || seconds >= publicConfig.apiRefreshTime
+  return Number.isNaN(seconds) || seconds < 0 || seconds >= config.apiRefreshTime
 }

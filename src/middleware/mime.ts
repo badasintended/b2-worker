@@ -1,12 +1,12 @@
 import { mimes as baseMimes, getMimeType } from 'hono/utils/mime'
 import { factory } from '../app'
-import { publicConfig } from '../config'
+import { config } from '../config'
 
 export const mimes = {
   ...baseMimes,
 }
 
-for (const [mime, extensions] of Object.entries(publicConfig.extraMimes)) {
+for (const [mime, extensions] of Object.entries(config.extraMimes)) {
   if (Array.isArray(extensions)) {
     for (const extension of extensions) {
       mimes[extension] = mime

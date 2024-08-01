@@ -5,5 +5,5 @@ dist
 wrangler.toml
 
 .bundled/
-config/private.ts
+config/config.ts
 curl/

@@ -1,33 +1,26 @@
-import publicConfig from '../config/public'
-import privateConfig from '../config/private'
+import config from '../config/config'
 
-export type PublicConfig = {
+export type Config = {
+  b2: {
+    keyId: string
+    key: string
+  }
   siteName: string
   uploader: boolean
+  accounts: Array<{
+    username: string
+    password: string
+  }>
+  downloaders: Array<{
+    username: string
+    rule: string
+  }> | undefined
   apiRefreshTime: number
   directoryCache: number
   fileCache: number
   extraMimes: Record<string, string | string[]>
 }
 
-export type PrivateConfig = {
-  accounts: Array<{
-    username: string
-    password: string
-  }>
-
-  downloaders: Array<{
-    username: string
-    rule: string
-  }> | undefined
-
-  b2: {
-    keyId: string
-    key: string
-  }
-}
-
 export {
-  publicConfig,
-  privateConfig,
+  config,
 }

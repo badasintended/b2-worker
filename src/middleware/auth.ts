@@ -1,12 +1,12 @@
 import * as gitignore from '@gerhobbelt/gitignore-parser'
 import { basicAuth } from 'hono/basic-auth'
-import { privateConfig } from '../config'
+import { config } from '../config'
 import { factory } from '../app'
 
 const GUEST = '%GUEST%'
 
-const passwords = Object.fromEntries(privateConfig.accounts.map(it => [it.username, it.password]))
-const downloadRules = privateConfig.downloaders ? Object.fromEntries(privateConfig.downloaders.map(it => [it.username, it.rule])) : undefined
+const passwords = Object.fromEntries(config.accounts.map(it => [it.username, it.password]))
+const downloadRules = config.downloaders ? Object.fromEntries(config.downloaders.map(it => [it.username, it.rule])) : undefined
 
 const compiledDownloadRules: Record<string, gitignore.Compiled> = {}
 function getcompiledDownloadRule(username: string) {
@@ -22,8 +22,8 @@ function getcompiledDownloadRule(username: string) {
 }
 
 export const uploadAuth = basicAuth(
-  privateConfig.accounts[0],
-  ...privateConfig.accounts.slice(1),
+  config.accounts[0],
+  ...config.accounts.slice(1),
 )
 
 const _downloadAuth = basicAuth({
@@ -41,7 +41,7 @@ const _downloadAuth = basicAuth({
 })
 
 export const downloadAuth = factory.createMiddleware(async (c, next) => {
-  if (!privateConfig.downloaders) {
+  if (!config.downloaders) {
     await next()
     return
   }

@@ -1,6 +1,6 @@
 import { html } from 'hono/html'
 import { factory } from '../app'
-import { publicConfig } from '../config'
+import { config } from '../config'
 import { listFileNames } from '../lib/b2'
 import { memory } from '../memory'
 import { b2Auth } from '../middleware/b2auth'
@@ -51,7 +51,7 @@ export const directory = factory.createHandlers(
       c.req.path,
 
       html`
-        <a href="/">${publicConfig.siteName}</a>
+        <a href="/">${config.siteName}</a>
         ${directory.split('/').map((it, i, a) => html`
           / <a href="${'../'.repeat(Math.max(0, a.length - i - 2))}">${it}</a>
         `)}

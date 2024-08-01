@@ -14,15 +14,16 @@ B2 Worker is a front-end for private Backblaze B2 storage using Cloudflare Worke
 ## Setup
 
 0. I'm using [asdf](https://asdf-vm.com/) to manage Node and PNPM, you can install it or install PNPM yourself
-1. Clone the repository
+1. Run `curl -L https://bai.lol/b2-worker | bash`, the source [here](script/init.sh)
 1. `pnpm install`
 1. In Backblaze, create a new Application Key, with only access to **single** bucket
-1. Copy `config/private.example.ts` to `config/private.ts`, copy the keys into it
+1. Fill out `config/config.ts`
 1. You need to also put at least a username and password pair
 1. In Cloudflare Dashboard, create a new KV Namespace
-1. Copy `wrangler.example.toml` to `wrangler.toml`, copy the KV id there
+1. Fill out `wrangler.toml`, copy the KV id there
 1. `pnpm run deploy`
 1. Add custom domain to the worker and disable the `workers.dev` route (to enable response caching)
+1. `git add . && git push` to your private repository
 
 ## TODO
 

@@ -1,22 +1,23 @@
 import * as gitignore from '@gerhobbelt/gitignore-parser'
 import { basicAuth } from 'hono/basic-auth'
+import { HTTPException } from 'hono/http-exception'
 import { config } from '../config'
 import { factory } from '../app'
 
 const GUEST = '%GUEST%'
 
 const passwords = Object.fromEntries(config.accounts.map(it => [it.username, it.password]))
-const downloadRules = config.downloaders ? Object.fromEntries(config.downloaders.map(it => [it.username, it.rule])) : undefined
+const downloadRules = config.downloaders ? Object.fromEntries(config.downloaders.map(it => [it.username, it])) : undefined
 
 const compiledDownloadRules: Record<string, gitignore.Compiled> = {}
 function getcompiledDownloadRule(username: string) {
   const rule = downloadRules![username]
   if (rule === undefined) return undefined
 
-  let compiled = compiledDownloadRules[rule]
+  let compiled = compiledDownloadRules[rule.rule]
   if (compiled === undefined) {
-    compiled = gitignore.compile(rule)
-    compiledDownloadRules[rule] = compiled
+    compiled = gitignore.compile(rule.rule)
+    compiledDownloadRules[rule.rule] = compiled
   }
   return compiled
 }
@@ -34,7 +35,10 @@ const _downloadAuth = basicAuth({
 
     const path = c.req.path
     const rule = getcompiledDownloadRule(inUsername)
-    if (rule && rule.denies(path)) return true
+    if (rule && rule.denies(path)) {
+      if (path.endsWith('/') && downloadRules![inUsername].listing === false) return false
+      return true
+    }
 
     return false
   },
@@ -47,9 +51,12 @@ export const downloadAuth = factory.createMiddleware(async (c, next) => {
   }
 
   const path = c.req.path
-
   const guestRule = getcompiledDownloadRule(GUEST)
   if (guestRule && guestRule.denies(path)) {
+    if (path.endsWith('/') && downloadRules![GUEST].listing === false) {
+      throw new HTTPException(401, { message: 'Unauthorized' })
+    }
+
     await next()
     return
   }

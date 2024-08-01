@@ -15,6 +15,7 @@ export type Config = {
   downloaders: Array<{
     username: string
     rule: string
+    listing?: boolean
   }> | undefined
   apiRefreshTime: number
   directoryCache: number

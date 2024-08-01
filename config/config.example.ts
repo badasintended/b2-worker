@@ -45,6 +45,14 @@ export default {
     {
       username: '%GUEST%',
       rule: guestRule,
+
+      /**
+       * Whether to enable directory listing for this rule,
+       * the global listing option must be true for this to function.
+       *
+       * @default true if ommited
+       */
+      listing: true,
     },
   ],
 

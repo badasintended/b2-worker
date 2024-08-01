@@ -54,7 +54,8 @@ export const downloadAuth = factory.createMiddleware(async (c, next) => {
   const guestRule = getcompiledDownloadRule(GUEST)
   if (guestRule && guestRule.denies(path)) {
     if (path.endsWith('/') && downloadRules![GUEST].listing === false) {
-      throw new HTTPException(401, { message: 'Unauthorized' })
+      await _downloadAuth(c, next)
+      return
     }
 
     await next()

@@ -6,11 +6,13 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@gerhobbelt/gitignore-parser": "0.2.0-9",
     "hono": "^4.3.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.18.1",
     "@cloudflare/workers-types": "^4.20240403.0",
+    "@types/gitignore-parser": "^0.0.3",
     "eslint": "9.2.0",
     "eslint-plugin-format": "^0.1.1",
     "husky": "^9.0.11",

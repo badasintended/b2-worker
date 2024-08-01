@@ -4,6 +4,7 @@ main = "src/index.ts"
 
 [[rules]]
 type = "Text"
+fallthrough = true
 globs = [ "**/*.css" ]
 
 [[kv_namespaces]]

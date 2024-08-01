@@ -1,13 +1,13 @@
 import { html } from 'hono/html'
 import { factory } from '../app'
-import { auth } from '../middleware/auth'
+import { uploadAuth } from '../middleware/auth'
 import { b2Auth } from '../middleware/b2auth'
 import { getUploadUrl, uploadFile } from '../lib/b2'
 import { cfCache, memory } from '../memory'
 import { template } from '../template'
 
 export const uploadPut = factory.createHandlers(
-  auth,
+  uploadAuth,
   b2Auth,
 
   async (c) => {
@@ -27,7 +27,7 @@ export const uploadPut = factory.createHandlers(
 )
 
 export const uploadPost = factory.createHandlers(
-  auth,
+  uploadAuth,
   b2Auth,
 
   async (c) => {
@@ -57,7 +57,7 @@ export const uploadPost = factory.createHandlers(
 )
 
 export const uploader = factory.createHandlers(
-  auth,
+  uploadAuth,
   // fileCache,
   async (c) => {
     const directory = c.req.query('d')

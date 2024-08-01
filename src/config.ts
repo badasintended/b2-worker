@@ -16,6 +16,11 @@ export type PrivateConfig = {
     password: string
   }>
 
+  downloaders: Array<{
+    username: string
+    rule: string
+  }> | undefined
+
   b2: {
     keyId: string
     key: string

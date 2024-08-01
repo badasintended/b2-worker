@@ -6,6 +6,7 @@ import { memory } from '../memory'
 import { b2Auth } from '../middleware/b2auth'
 import { directoryCache } from '../middleware/cache'
 import { template } from '../template'
+import { downloadAuth } from '../middleware/auth'
 
 const collator = new Intl.Collator('en', {
   numeric: true,
@@ -14,6 +15,7 @@ const collator = new Intl.Collator('en', {
 })
 
 export const directory = factory.createHandlers(
+  downloadAuth,
   b2Auth,
   directoryCache,
 

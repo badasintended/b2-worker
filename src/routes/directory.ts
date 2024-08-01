@@ -39,7 +39,7 @@ export const directory = factory.createHandlers(
     }
 
     const files = list.files
-      .filter(it => it.action === 'folder' || it.action === 'upload')
+      .filter(it => (it.action === 'folder' || it.action === 'upload') && !it.fileName.endsWith('.bzEmpty'))
       .map(it => ({ ...it, fileName: it.fileName.slice(directory.length) }))
       .sort((a, b) => a.action === b.action
         ? collator.compare(a.fileName, b.fileName)

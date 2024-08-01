@@ -44,5 +44,9 @@
     "gql",
     "graphql",
     "astro"
-  ]
+  ],
+
+  "files.associations": {
+    "**.rule": "ignore"
+  }
 }

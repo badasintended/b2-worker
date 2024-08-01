@@ -5,7 +5,10 @@ main = "src/index.ts"
 [[rules]]
 type = "Text"
 fallthrough = true
-globs = [ "**/*.css" ]
+globs = [
+  "**/*.css",
+  "**/*.rule"
+]
 
 [[kv_namespaces]]
 binding = "KV"

@@ -47,6 +47,13 @@ export const directory = factory.createHandlers(
         ? collator.compare(a.fileName, b.fileName)
         : a.action === 'folder' ? -1 : 1)
 
+    const uploader = config.uploader
+      ? html`
+          <div class="grow"></div>
+          <a href="/uploader?d=/${directory}">Upload</a>
+        `
+      : html``
+
     return c.html(template(
       c.req.path,
 
@@ -56,8 +63,7 @@ export const directory = factory.createHandlers(
           / <a href="${'../'.repeat(Math.max(0, a.length - i - 2))}">${it}</a>
         `)}
 
-        <div class="grow"></div>
-        <a href="/uploader?d=/${directory}">Upload</a>
+        ${uploader}
       `,
 
       empty

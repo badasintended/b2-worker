@@ -6,6 +6,7 @@ export type Config = {
     key: string
   }
   siteName: string
+  listing: boolean
   uploader: boolean
   accounts: Array<{
     username: string

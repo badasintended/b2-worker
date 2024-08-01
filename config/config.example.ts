@@ -1,4 +1,5 @@
 import type { Config } from '../src/config'
+import guestRule from './rule/guest.rule'
 
 export default {
   /**
@@ -16,8 +17,12 @@ export default {
   siteName: 'B2',
 
   /**
+   * Whether to enable directory listing.
+   */
+  listing: true,
+
+  /**
    * Whether to enable the uploader.
-   * @default true
    */
   uploader: true,
 
@@ -39,7 +44,7 @@ export default {
   downloaders: [
     {
       username: '%GUEST%',
-      rule: '*',
+      rule: guestRule,
     },
   ],
 

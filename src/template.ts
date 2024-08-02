@@ -18,6 +18,7 @@ export function template(title: string, h1: Html, main: Html) {
         <footer>
           Powered by <a href="//git.bai.lol/b2-worker">b2-worker</a>
         </footer>
+        <script src="/client.js"></script>
       </body>
     </html>
   `

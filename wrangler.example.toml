@@ -7,7 +7,8 @@ type = "Text"
 fallthrough = true
 globs = [
   "**/*.css",
-  "**/*.rule"
+  "**/*.rule",
+  "**/*.raw.js"
 ]
 
 [[kv_namespaces]]

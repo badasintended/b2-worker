@@ -1,6 +1,5 @@
 import * as gitignore from '@gerhobbelt/gitignore-parser'
 import { basicAuth } from 'hono/basic-auth'
-import { HTTPException } from 'hono/http-exception'
 import { config } from '../config'
 import { factory } from '../app'
 

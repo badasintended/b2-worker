@@ -130,7 +130,7 @@ function listing(path: string, name: string, isFile: boolean, size: number, time
   let dateStr: string
   let sizeStr: string
   if (isFile) {
-    dateStr = new Date(timestamp).toISOString().replace('T', ' ').split('.')[0]
+    dateStr = new Date(timestamp).toISOString()
     sizeStr = humanSize(size)
   } else {
     dateStr = '\u2014'

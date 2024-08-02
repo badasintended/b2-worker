@@ -13,6 +13,11 @@ declare module '*.txt' {
   export default v
 }
 
+declare module '*.raw.js' {
+  const v: string
+  export default v
+}
+
 declare module '@gerhobbelt/gitignore-parser' {
   import types from 'gitignore-parser'
 

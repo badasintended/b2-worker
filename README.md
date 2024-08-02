@@ -1,15 +1,22 @@
 # B2 Worker
 
-B2 Worker is a front-end for private Backblaze B2 storage using Cloudflare Worker.
+B2 Worker is a front-end for private Backblaze B2 storage using Cloudflare Worker
 
 ## Features
 
 - Directory Listing
 - File upload API via `PUT` method
 - File uploader form at `/uploader`
-- Basic authentication
+- Basic authentication and authorization
 - Prevent direct bucket access
 - Serve content from B2 bucket for free from Cloudflare's CDN
+
+## Demo
+
+**[maven4.bai.lol](https://maven4.bai.lol)**
+
+I used this project to host a directory listing for the Maven server for my Minecraft mods.    
+The `PUT` API is also for easy Maven publishing.
 
 ## Setup
 

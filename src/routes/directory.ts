@@ -20,7 +20,7 @@ export const directory = factory.createHandlers(
   directoryCache,
 
   async (c) => {
-    const directory = c.req.path.substring(1)
+    const directory = decodeURIComponent(c.req.path.substring(1))
     const response = await listFileNames(memory.auth!, {
       prefix: directory,
       delimiter: '/',
@@ -140,7 +140,7 @@ function listing(path: string, name: string, isFile: boolean, size: number, time
   return html`
     <tr class="entry">
       <td class="pad"></td>
-      <td class="name"><a href="${encodeURIComponent(path)}">${name}</a></td>
+      <td class="name"><a href="${path}">${name}</a></td>
       <td class="size">${sizeStr}</td>
       <td class="date">${dateStr}</td>
       <td class="pad"></td>

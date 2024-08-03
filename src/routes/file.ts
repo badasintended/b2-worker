@@ -13,7 +13,8 @@ export const file = factory.createHandlers(
   mime,
 
   async (c) => {
-    const download = await downloadFile(memory.auth!, c.req.path.substring(1))
+    const path = encodeURIComponent(decodeURIComponent(c.req.path.substring(1)))
+    const download = await downloadFile(memory.auth!, path)
     return c.newResponse(download.body, download.status)
   },
 )

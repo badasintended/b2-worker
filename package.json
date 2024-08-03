@@ -3,7 +3,9 @@
     "dev": "wrangler dev --port 8787",
     "build": "rm -rf .bundled/ && wrangler deploy --outdir .bundled/ --dry-run",
     "deploy": "wrangler deploy --minify",
-    "prepare": "husky"
+    "prepare": "husky",
+    "setup": "bash ./script/setup.sh",
+    "update": "bash ./script/update.sh"
   },
   "dependencies": {
     "@gerhobbelt/gitignore-parser": "0.2.0-9",

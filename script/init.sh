@@ -19,6 +19,7 @@ git clone "$UPSTREAM" "$repo_name"
 cd "$repo_name"
 git remote set-url origin "$remote_origin"
 git remote add upstream "$UPSTREAM"
+git remote set-url --push upstream PUSH_TO_UPSTREAM_IS_DISALLOWED
 
 rm .gitignore
 mv .gitignore.private .gitignore

@@ -15,7 +15,7 @@ B2 Worker is a front-end for private Backblaze B2 storage using Cloudflare Worke
 
 **[maven4.bai.lol](https://maven4.bai.lol)**
 
-I used this project to host a directory listing for the Maven server for my Minecraft mods.    
+I used this project to host a directory listing for the Maven server for my Minecraft mods.
 The `PUT` API is also for easy Maven publishing.
 
 ## Setup
